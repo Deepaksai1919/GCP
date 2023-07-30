@@ -1,0 +1,5 @@
+gcloud auth list
+gcloud config set account <mailId>
+gcloud config list project
+gcloud config set project <projectId>
+gcloud pubsub topics list
