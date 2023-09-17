@@ -8,6 +8,16 @@ resource "google_cloud_run_v2_service" "run-app-from-tf" {
     }
     service_account = "svc-terraform@terraform-399209.iam.gserviceaccount.com"
   }
+  traffic {
+    type = "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+    revision = "run-app-from-tf-00001-b89"
+    percent = 50
+  }
+  traffic {
+    type = "TRAFFIC_TARGET_ALLOCATION_TYPE_REVISION"
+    revision = "run-app-from-tf-00002-8lc"
+    percent = 50
+  }
 }
 
 # For No Auth / Public Access
