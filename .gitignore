@@ -1,5 +1,13 @@
 #GCP Key
 *.json
+
+# Local .terraform directories
+**/.terraform*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
