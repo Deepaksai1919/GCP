@@ -3,7 +3,8 @@ resource "google_cloud_run_v2_service" "run-app-from-tf" {
   location = "asia-southeast1"
   template {
     containers {
-      image = "gcr.io/google-samples/hello-app:1.0"
+      # image = "gcr.io/google-samples/hello-app:1.0"
+      image = "gcr.io/google-samples/hello-app:2.0"
     }
     service_account = "svc-terraform@terraform-399209.iam.gserviceaccount.com"
   }
