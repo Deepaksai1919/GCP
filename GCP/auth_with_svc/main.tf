@@ -12,7 +12,7 @@ provider "google" {
   project = "terraform-399209"
   region = "us-central1"
   zone = "us-centra1-a"
-  credentials = "../sa.json"
+  credentials = "../../terraform-svc.json"
 }
 
 resource "google_storage_bucket" "GCS1" {
