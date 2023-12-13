@@ -60,13 +60,30 @@ resource "google_bigquery_table" "bq_table" {
     source_uris = [
       "gs://${google_storage_bucket.gcs_bucket.name}/*",
     ]
-
-    metadata_cache_mode = "AUTOMATIC"
-    
+    # metadata_cache_mode = "AUTOMATIC"
   }
-  max_staleness = "0-0 0 4:0:0"
-  # This ensures that the connection can access the bucket
-  # before Terraform creates a table.
+  # max_staleness = "0-0 0 4:0:0"
+  depends_on = [
+    google_project_iam_member.connection_iam
+  ]
+}
+
+resource "google_bigquery_table" "bq_content_table" {
+  deletion_protection = false
+  table_id            = "object_content_table"
+  dataset_id          = google_bigquery_dataset.object_dataset.dataset_id
+  external_data_configuration {
+    # connection_id = google_bigquery_connection.bq_connection.name
+    autodetect    = false
+    source_format = "NEWLINE_DELIMITED_JSON"
+    # This defines the source for the prior object table.
+    source_uris = [
+      "gs://${google_storage_bucket.gcs_bucket.name}/*.json",
+    ]
+    # metadata_cache_mode = "AUTOMATIC"
+  }
+  schema = file("${path.module}/content_schema.json")
+  # max_staleness = "0-0 0 4:0:0"
   depends_on = [
     google_project_iam_member.connection_iam
   ]
