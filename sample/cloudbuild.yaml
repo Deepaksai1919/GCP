@@ -1,0 +1,24 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build Image'
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/cicd-409404/sample/sample_ci_image:latest', '.' ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Run Tests'
+  entrypoint: 'bash'
+  args: 
+    - '-c'
+    - |
+      docker run --rm \
+      us-central1-docker.pkg.dev/cicd-409404/sample/sample_ci_image:latest \
+      python -m pytest tests/
+    
+# - name: 'us-central1-docker.pkg.dev/cicd-409404/sample/sample_ci_image:latest'
+#   id: 'Run Tests2'
+#   entrypoint: '/bin/sh'
+#   args:
+#     - '-c'
+#     - 'python -m pytest tests/'
+
+images:
+- 'us-central1-docker.pkg.dev/cicd-409404/sample/sample_ci_image:latest'
