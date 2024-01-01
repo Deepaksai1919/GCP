@@ -1,10 +1,16 @@
-# Read the departments dataset and find the attendance (column 3) of employees in accoutns section
+# Read the departments dataset and find the attendance (column 3) of employees in accounts section
 # Use only ParDo
 
 import apache_beam as beam
 
 class SplitString(beam.DoFn):
+    """
+        Overrides the process method
+    """
     def process(self, element):
+        """
+            Accepts an element and returns 0 or more elements
+        """
         return [element.strip().split(',')]
     
 class FilterAccounts(beam.DoFn):

@@ -11,7 +11,7 @@ PCollection = (
     | 'Filter the employees in Accounts section' >> beam.Filter(lambda record: record[3] == 'Accounts' )
     | 'Select the employee name and attendance' >> beam.Map(lambda record: (record[1], int(record[2])))
     | 'Combine Per Key' >> beam.CombinePerKey(sum)
-    | 'Write result tot output' >> beam.io.WriteToText('outputs/problem1/out')
+    | 'Write result to output' >> beam.io.WriteToText('outputs/problem1/out')
 )
 
 pipeline.run()
